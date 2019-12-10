@@ -1,18 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-class Counter extends Component {
-  render() {
-    return (
-      <div className="Counter">
-        <p className="count">0</p>
-        <section className="controls">
-          <button>Increment</button>
-          <button>Decrement</button>
-          <button>Reset</button>
-        </section>
-      </div>
-    );
-  }
-}
+// const getStateFromLocalStorage = () => {
+//   const storage = localStorage.getItem('counterState');
+//   if (storage) return JSON.parse(storage);
+//   return { count: 0 };
+// }
+// function storeStateInLocalStorage() {
+//   localStorage.setItem('counterStorage', JSON.stringify(this.state))
+//   console.log(localStorage);
+// }
 
-export default Counter;
+
+const Counter = ({ max, step }) => {
+  const [count, setCount] = React.useState(0);
+
+  const increment = () => {
+    setCount(c => {
+      if (c >= max) return c;
+      return c + step;
+    });
+  };
+
+  const decrement = () => setCount(count - 1);
+  const reset = () => setCount(0);
+
+  useEffect(() => {
+    document.title = `Counter: ${count}`;
+
+  }, []);
+
+  return (
+    <div className="Counter">
+      <p className="count">{count}</p>
+      <section className="controls">
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
+        <button onClick={reset}>Reset</button>
+      </section>
+    </div>
+  );
+
+};
+
+
+
+export default Counter; 
