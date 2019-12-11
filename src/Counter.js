@@ -23,6 +23,12 @@ class Counter extends Component {
     }));
   };
 
+  componentDidUpdate() {
+    setTimeout(() => {
+      console.log(`Count: ${this.state.count}`)
+    }, 3000);
+  }
+
   render() {
     const { count } = this.state;
 
